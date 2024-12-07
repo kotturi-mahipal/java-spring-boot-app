@@ -21,11 +21,11 @@ jobs:
 
       - name: Extract commit hash
         id: commit_hash
-        run: echo "::set-output name=hash::$(git rev-parse --short HEAD)"
+        run: echo "commit_hash=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
       - name: Build and push docker image
         uses: docker/build-push-action@v6.10.0
         with:
           context: .
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/java-maven-app:${{ steps.commit_hash.outputs.hash }}
+          tags: ${{ secrets.DOCKER_USERNAME }}/java-maven-app:${{ env.commit_hash }}
