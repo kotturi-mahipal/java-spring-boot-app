@@ -21,7 +21,7 @@ jobs:
 
       - name: Extract commit hash
         id: commit_hash
-        run: echo "::set-output name=hash::$(git rev-parse HEAD)"
+        run: echo "::set-output name=hash::$(git rev-parse --short HEAD)"
 
       - name: Build and push docker image
         uses: docker/build-push-action@v6.10.0
